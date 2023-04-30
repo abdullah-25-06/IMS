@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+Welcom To Health Care Pharmacy
+Hello {{ name }}! 
+
+Please Confirm your Email by clicking on the following link 
+
+Confirmation Link : <a href=" http://{{ domain }}{% url 'c_app:activate' uidb64=uid token=token %}">Click To activate</a>
+
+{% endautoescape %}

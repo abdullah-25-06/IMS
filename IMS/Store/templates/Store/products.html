@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% block body %}
+
+<div class="container">
+    <a href="{% url 'store:temp_cart' id=request.user.id %}"><button class="btn btn-secondary">View Cart</button></a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          
+          <!-- <th scope="col">#</th> -->
+          <th scope="col">Item </th>
+          <th scope="col">Company </th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Order</th>
+          
+        </tr>
+      
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr> 
+          <!-- <th scope="row">1</th> -->
+          <!-- <td>Mark</td> -->
+          <td> {{ item.p_name }} </td>
+          <td>{{ item.c.c_name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.sell }}</td>
+          <!-- <td> <input type="number" min="0" placeholder="Enter Quantity"> <button class='btn btn-secondary'>Submit</button></td> -->
+          <td>
+            <form action="{% url 'store:intermOrder' id=item.p_id %}" method="post">
+              {% csrf_token %}
+              <input type="number" min="0" name="amount" placeholder="Enter Quantity" required>
+              <button class='btn btn-secondary'>Submit</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

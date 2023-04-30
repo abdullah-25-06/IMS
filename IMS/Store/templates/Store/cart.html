@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block body %}
+<br>
+<hr>
+<h1>Your Total Amount is {{ total }}</h1>
+{% for i in items %}
+    
+    {{i.p.p_name}}
+    {{i.p.sell}}
+    {{ i.quantity }}
+    {{ i.amount }}
+    <hr>
+{% endfor %}
+{% endblock %}

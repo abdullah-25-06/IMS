@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block body %}
+{% if page_name == 'login' %}    
+<div class="container">
+
+    <form action="" method="post">
+    {% csrf_token %}
+    <input class="form-control" type="email" name="{{ form.name.email }}"  placeholder="Enter email" required>
+    <input class="form-control" type="password" name="{{ form.name.password }}"  placeholder="Enter password" required>
+    <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+</div>
+{% elif page_name == 'changed' %}
+    <!-- {% if form.errors %}
+        {% for error in form.email.errors %}
+           <br> {{ error }} <br>
+        {% endfor %}
+    {% endif %} -->
+    {% if form.errors %}
+        <div class="alert alert-danger container py-0 center">
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                       <li>{{ field }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+        </div>
+    {% endif %}
+
+    <form action="{% url 'c_app:change' %}" method="post">
+        {% csrf_token %}
+        <label for="{{form.name}}">Email</label>
+        <input type="email" id="{{form.name}}" name="{{ form.email.name }}" value="{{ form.email.value}}" >
+            <!-- {{form.email}} -->
+            <!-- {{ form }} -->
+        <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+
+{% else %}
+<div class="container">
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
